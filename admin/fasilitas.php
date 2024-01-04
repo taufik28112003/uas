@@ -84,7 +84,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th style="width: 10px">#</th>
+                      <th style="width: 10px">No</th>
                       <th>No Kamar</th>
                       <th>Fasilitas</th>
                       <th>Aksi</th>

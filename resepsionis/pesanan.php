@@ -104,11 +104,6 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $query = "SELECT * FROM pesanan ORDER BY id_pesanan ASC";
-                                           $data = mysqli_query($koneksi, $query);
-                                       if (!$data) {
-                                           die("Query Error: ".mysqli_errno($koneksi). " - ".mysqli_error($koneksi));
-                                            }
                                         $no = 1;
                                         while ($d = mysqli_fetch_array($data)) {
                                             ?>

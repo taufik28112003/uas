@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2022 at 03:17 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.1.15
+-- Generation Time: Jan 04, 2024 at 07:45 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ukk`
+-- Database: `hotel`
 --
 
 -- --------------------------------------------------------
@@ -32,14 +31,18 @@ CREATE TABLE `fasilitas_kamar` (
   `id_fasilitas` int(11) NOT NULL,
   `id_kamar` int(11) NOT NULL,
   `fasilitas` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `fasilitas_kamar`
 --
 
 INSERT INTO `fasilitas_kamar` (`id_fasilitas`, `id_kamar`, `fasilitas`) VALUES
-(1, 8, 'Kamar Mandi di Dalam\r\nFull AC\r\nKolam Renang');
+(1, 8, 'Kamar Mandi di Dalam\r\nFull AC\r\nKolam Renang'),
+(3, 0, 'ac,sauna\r\n\r\n\r\n'),
+(4, 11, 'BATHUP\r\n'),
+(5, 10, 'Kolam Renang\r\n\r\n'),
+(6, 14, 'SAUNA,AC');
 
 -- --------------------------------------------------------
 
@@ -51,14 +54,14 @@ CREATE TABLE `galeri` (
   `id_galeri` int(11) NOT NULL,
   `keterangan` varchar(255) NOT NULL,
   `foto` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `galeri`
 --
 
 INSERT INTO `galeri` (`id_galeri`, `keterangan`, `foto`) VALUES
-(1, 'Kolam Renang', '398-823c97c0d94e6b570a893e38e23c962e_crop_920x530.jpg'),
+(1, 'Kolam renang', '398-823c97c0d94e6b570a893e38e23c962e_crop_920x530.jpg'),
 (2, 'Tempat Tidur', '448-5f081b41cc76c.jpeg'),
 (5, 'Lobi', '417-Rayaburi_Hotel_Patong_-_Lobby.jpg'),
 (6, 'Tempat Makan', '295-fairmont.jpg'),
@@ -74,15 +77,23 @@ INSERT INTO `galeri` (`id_galeri`, `keterangan`, `foto`) VALUES
 CREATE TABLE `kamar` (
   `id_kamar` int(11) NOT NULL,
   `no_kamar` varchar(255) DEFAULT NULL,
-  `foto` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `foto` varchar(255) DEFAULT NULL,
+  `tipe_kamar` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kamar`
 --
 
-INSERT INTO `kamar` (`id_kamar`, `no_kamar`, `foto`) VALUES
-(8, '1', '372-HI556746387.jpg');
+INSERT INTO `kamar` (`id_kamar`, `no_kamar`, `foto`, `tipe_kamar`) VALUES
+(1, '001', '372-HI556746387.jpg', 'VVIP'),
+(2, '002', '675-377-5f081b41cc76c.jpeg', 'VVIP'),
+(3, '003', '195-90-512-Desain Hotel Mewah Minimalis.jpg', 'VVIP'),
+(4, '004', '574-134-281-fairmont.jpg', 'SUPERVISOR'),
+(5, '005', '477-748-625-60c6.jpg', 'VVIP'),
+(6, '006', '980-870-281-fairmont.jpg', 'SUPERVISOR'),
+(7, '007', '470-417-Rayaburi_Hotel_Patong_-_Lobby.jpg', 'superior'),
+(8, '008', '372-184-281-fairmont.jpg', 'VVIP');
 
 -- --------------------------------------------------------
 
@@ -100,17 +111,21 @@ CREATE TABLE `pesanan` (
   `hp_pemesan` varchar(255) DEFAULT NULL,
   `nama_tamu` varchar(255) DEFAULT NULL,
   `id_kamar` int(11) DEFAULT NULL,
+  `FOTO` varchar(255) DEFAULT NULL,
   `status` varchar(2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pesanan`
 --
 
-INSERT INTO `pesanan` (`id_pesanan`, `cek_in`, `cek_out`, `jml_kamar`, `nama_pemesan`, `email_pemesan`, `hp_pemesan`, `nama_tamu`, `id_kamar`, `status`) VALUES
-(2, '2022-03-24', '2022-03-25', '1', 'Mardeta', 'mardeta@gmail.com', '0075664', 'Mardeta', 3, '2'),
-(3, '2022-03-30', '2022-03-31', '1', 'Diandra', 'diandra@gmail.com', '0075664', 'Diandra', 2, '2'),
-(4, '2022-03-28', '2022-03-29', '1', 'Jumsih', 'jumsih@gmail.com', '070600', 'Jumsih', 6, '2');
+INSERT INTO `pesanan` (`id_pesanan`, `cek_in`, `cek_out`, `jml_kamar`, `nama_pemesan`, `email_pemesan`, `hp_pemesan`, `nama_tamu`, `id_kamar`, `FOTO`, `status`) VALUES
+(2, '2022-03-24', '2022-03-25', '1', 'KAKA MAHFUD', 'kaka@gmail.com', '0075664', 'kakamahfud', 1, 'ktpp.jpg', '2'),
+(3, '2022-03-30', '2022-03-31', '1', 'ALDIYANSYAH', 'aldiyansyah@gmail.com', '0075664', 'aldi', 2, 'ktm.jpg', '2'),
+(4, '2022-03-28', '2022-03-29', '1', 'RESMIATI', 'resmiati@gmail.com', '070600', 'resmi', 6, 'ktp.jpg', '2'),
+(5, '2023-12-20', '2023-12-26', '1', 'TAUFIK HIDAYAT', 'taufikhidayat@gmail.com', '081379012923', 'taufik', 7, 'ktm.jpg', '2'),
+(9, '2023-12-07', '2023-12-15', '2', 'AVANTIKA', 'W@GMAIL.COM', '0866297284', 'avantika', 3, 'ktp.jpg', '0'),
+(10, '2023-12-13', '2023-12-14', '1', 'NANTA WAHYU', 'wahyudwiyuliananta@gmail.com', '082175182252', 'nanta', 4, 'ktpp.jpg', '0');
 
 -- --------------------------------------------------------
 
@@ -124,15 +139,16 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `level` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `nama`, `username`, `password`, `level`) VALUES
-(1, 'Administrator', 'admin', 'admin', '1'),
-(3, 'Resepsionis', 'resepsionis', 'resepsionis', '2');
+(3, 'Resepsionis', 'resepsionis', 'resepsionis', '2'),
+(6, 'admin', 'admin', 'admin', '1'),
+(8, 'Taufik Hidayat', 'pengguna', 'pengguna', '3');
 
 --
 -- Indexes for dumped tables
@@ -176,31 +192,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `fasilitas_kamar`
 --
 ALTER TABLE `fasilitas_kamar`
-  MODIFY `id_fasilitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_fasilitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `galeri`
 --
 ALTER TABLE `galeri`
-  MODIFY `id_galeri` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_galeri` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `kamar`
 --
 ALTER TABLE `kamar`
-  MODIFY `id_kamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_kamar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

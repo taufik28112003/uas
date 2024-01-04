@@ -13,7 +13,7 @@ $nama_tamu = $_POST['nama_tamu'];
 $id_kamar = $_POST['id_kamar'];
 $FOTO = $_FILES['FOTO']['name'];
 
-if ($foto !="") {
+if ($FOTO !="") {
     $ekstensi_diperbolehkan = array('png','jpg','jpeg');
     $x = explode('.', $foto);
     $extensi = strtolower(end($x));
